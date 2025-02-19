@@ -1,0 +1,21 @@
+@startuml
+start
+:Se pushea un commit;
+:GitHub Actions se ejecuta;
+if (Pasa las Actions) then (si)
+    if (Pasa las pruebas manuales) then (si)
+        if (Desarrollo terminado) then (si)
+            :Hacer merge a develop;
+        else (no)
+            :Continuar desarrollo;
+        endif
+    else (no)
+        :Pedir cambios;
+        stop
+    endif
+else (no)
+    :Pedir cambios;
+    stop
+endif
+stop
+@enduml
