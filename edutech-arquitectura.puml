@@ -1,0 +1,29 @@
+@startuml
+package "Docker" {
+	node "Ollama" {
+		[REST API] as ollamaApi
+	}
+	
+	database "MariaDB" {
+		[Cursos]
+		[Usuarios]
+	}
+}
+
+package "Frontend" {
+	[Petición del usuario] as req
+	[Display]
+}
+
+package "Backend" {
+	[Java HTTP]
+	[JDBC]
+}
+
+ollamaApi <--> [Java HTTP]
+[JDBC] <--> "MariaDB"
+req --> [Java HTTP]
+[Java HTTP] <-> [JDBC]
+[Java HTTP] <-> [Display]
+[Cursos] -[hidden]- [Usuarios]
+@enduml
